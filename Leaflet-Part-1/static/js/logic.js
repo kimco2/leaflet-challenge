@@ -101,52 +101,7 @@ function getRadius(mag) {
   });
 
 
-/// Legend take 2
-
-// // Create a legend
-// let legend = L.control({position: 'bottomright'});
-
-// legend.onAdd = function (map) {
-//     let div = L.DomUtil.create('div', 'info legend');
-//     const depths = [-10, 10, 30, 50, 70, 90];
-
-//     for (var i = 0; i < depths.length; i++){
-//         div.innerHTML +=
-//         '<i class="circle" style="background:' + getColor(depths[i]) + '"></i> ' +
-//         (depths[i] ? depths[i] + '<br>' : '+');
-//     }
-// }
-    
-
-
-
-
-
-
-// // Create a legend
-// let legend = L.control({
-//     position: 'bottomright'
-// });
-
-// // Add the depths and colours required for the legend
-// legend.onAdd = function (){
-//     let div = L.DomUtil.create('div', 'info legend');
-//     let depths = [-10, 10, 30, 50, 70, 90];
-//     let colors = ["#f5487f", "#c7417b", "#8f3b76", "#ad2e24", "#553772", "#1f306e"];
-
-// // Loop through each depth to create a coloured square for each
-// for (var i = 0; i < depths.length; i++) {
-//     console.log(colors[i]);
-//     div.innerHTML +=
-//     "<i style='background: " + colors[i] + "'></i> " +
-//     depths[i] + (depths[i + 1] ? "–" + depths[i + 1] + "<br>" : "+");
-// }
-// return div;
-// };
-// legend.addTo(myMap);
-
-
-/// Legend take 3
+// Create a legend
 let legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
