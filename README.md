@@ -6,7 +6,7 @@
  - '**logic.js**' - the code for the map.
  - '**config.js**' - the url used.
 
- -The folder **Laflet-Part-1 / static / css** contains:
+ -The folder **Leaflet-Part-1 / static / css** contains:
  - '**style.css**' - updated to include the legend.
  
 Thanks
