@@ -1,5 +1,3 @@
-
-
   // Create the base layers
   let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -38,7 +36,7 @@ L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 function styleInfo(feature) {
     return {
       fillOpacity: 1,
-      fillColor: getColour(feature.geometry.coordinates[2]),  // I don't think this is working properly.  As the colours on their chart seem more intense
+      fillColor: getColour(feature.geometry.coordinates[2]), 
       color: "#000000",
       radius: getRadius(feature.properties.mag),
       stroke: true,
@@ -67,16 +65,16 @@ function getColour(depth) {
     return "#F29455";
     }
     else {
-    return "#FF51EB"  // Do I need this??  This was to try and catch any others
+    return "#FF51EB"  // I added this just in case there were any with a depth lower than -10
     }
 };
 
 // This function sets the radius of the earthquake circle marker based on its magnitude
 function getRadius(mag) {
-    return mag * 5;  // All my circles look a similar size am i doing something wrong?
+    return mag * 5;  
 };
 
-// Get the geoJson data from the url
+// Grab the geoJson data from the url (stored in the config.js file)
   d3.json(queryUrl).then(function(data) {
 // Create a geoJson layer with the data
     L.geoJson(data, {
@@ -84,7 +82,7 @@ function getRadius(mag) {
         pointToLayer: function(feature, latlng) {
         return L.circleMarker(latlng);
         },
-        // Set the style for each circle marker using the styleInfo function
+        // Set the style for each circle marker
         style: styleInfo,
         onEachFeature: function(feature, layer) {
             layer.bindPopup(`<h3>${feature.properties.place}</h3><hr>
@@ -104,7 +102,7 @@ let legend = L.control({position: 'bottomright'});
 // Create components of the legend (colour and text)
 legend.onAdd = function (map) {
 let div = L.DomUtil.create("div", "legend");
-  div.innerHTML += '<i style="background: #F29455"></i><span>-10-10</span><br>';  //their legend looks to be a different colour to the markers?
+  div.innerHTML += '<i style="background: #F29455"></i><span>-10-10</span><br>';  
   div.innerHTML += '<i style="background: #D18779"></i><span>10-30</span><br>';
   div.innerHTML += '<i style="background: #A96A77"></i><span>30-50</span><br>';
   div.innerHTML += '<i style="background: #804E74"></i><span>50-70</span><br>';
