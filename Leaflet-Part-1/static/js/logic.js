@@ -1,5 +1,4 @@
-// Store our API as queryUrl.
-let queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+
 
   // Create the base layers
   let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -13,8 +12,8 @@ let queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_we
 
 // Create the map, setting centre, zoom, and layer
 let myMap = L.map("map", {
-center: [-10.510462, 105.053362],
-zoom: 4,
+center: [-15.510462, 105.053362],
+zoom: 3.5,
 layers: [street]
 });
 
@@ -35,14 +34,11 @@ let overlayMaps = {
 // Add a control to the map so the user can change the layers they look at
 L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 
-
-// Get the style data for each earthquake included on the map. 
-// Color is being set based on depth, and radius based on magnitude
+// Get the style data for each earthquake included on the map. Color is being set based on depth, and radius based on magnitude
 function styleInfo(feature) {
     return {
-      opacity: 1,
       fillOpacity: 1,
-      fillColor: getColour(feature.geometry.coordinates[2]),  // I don't think this is working properly
+      fillColor: getColour(feature.geometry.coordinates[2]),  // I don't think this is working properly.  As the colours on their chart seem more intense
       color: "#000000",
       radius: getRadius(feature.properties.mag),
       stroke: true,
@@ -53,67 +49,71 @@ function styleInfo(feature) {
 // This function sets the circle colour for the earthquake depending on its depth
 function getColour(depth) {
     if (depth > 90) {
-        return "#1f306e";
+        return "#19073B";
     }
     else if (depth > 70) {
-        return "#553772";
+        return "#573172";
     }
     else if (depth >50) {
-        return "#ad2e24";
+        return "#804E74";
     }
     else if (depth > 30) {
-        return "#8f3b76";
+        return "#A96A77";
     }
     else if (depth > 10) {
-        return "#c7417b";
+        return "#D18779";
     }
     else if (depth > -10){
-    return "#f5487f";
+    return "#F29455";
     }
     else {
-    return "#f5df48"
+    return "#FF51EB"  // Do I need this??  This was to try and catch any others
     }
 };
 
 // This function sets the radius of the earthquake circle marker based on its magnitude
 function getRadius(mag) {
-    return mag * 4;
+    return mag * 5;  // All my circles look a similar size am i doing something wrong?
 };
 
 // Get the geoJson data from the url
   d3.json(queryUrl).then(function(data) {
 // Create a geoJson layer with the data
     L.geoJson(data, {
-        // And turn the data into a circle marker on the map
+        // Turn the data into a circle marker on the map
         pointToLayer: function(feature, latlng) {
-          console.log(data);
-          return L.circleMarker(latlng);
+        return L.circleMarker(latlng);
         },
         // Set the style for each circle marker using the styleInfo function
         style: styleInfo,
         onEachFeature: function(feature, layer) {
-            layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}</p><p>${new Date(feature.properties.time)}</p>`);
-        }
+            layer.bindPopup(`<h3>${feature.properties.place}</h3><hr>
+            <p><strong>Magnitude:</strong> ${feature.properties.mag} 
+            <br><strong>Depth:</strong> ${feature.geometry.coordinates[2]}
+            <br>${new Date(feature.properties.time)}</p>`);
+          }
         }).addTo(earthquakes);
   
     // Add the earthquake layer to the map
     earthquakes.addTo(myMap);
   });
 
-
 // Create a legend
 let legend = L.control({position: 'bottomright'});
 
+// Create components of the legend (colour and text)
 legend.onAdd = function (map) {
 let div = L.DomUtil.create("div", "legend");
-  div.innerHTML += '<i style="background: #f5487f"></i><span>-10-10</span><br>';
-  div.innerHTML += '<i style="background: #c7417b"></i><span>10-30</span><br>';
-  div.innerHTML += '<i style="background: #8f3b76"></i><span>30-50</span><br>';
-  div.innerHTML += '<i style="background: #ad2e24"></i><span>50-70</span><br>';
-  div.innerHTML += '<i style="background: #553772"></i><span>70-90</span><br>';
-  div.innerHTML += '<i style="background: #1f306e"></i><span>90+</span><br>';
+  div.innerHTML += '<i style="background: #F29455"></i><span>-10-10</span><br>';  //their legend looks to be a different colour to the markers?
+  div.innerHTML += '<i style="background: #D18779"></i><span>10-30</span><br>';
+  div.innerHTML += '<i style="background: #A96A77"></i><span>30-50</span><br>';
+  div.innerHTML += '<i style="background: #804E74"></i><span>50-70</span><br>';
+  div.innerHTML += '<i style="background: #573172"></i><span>70-90</span><br>';
+  div.innerHTML += '<i style="background: #19073B"></i><span>90+</span><br>';
   return div;
 };
+
+// Add legend to the map
 legend.addTo(myMap);
 
 
