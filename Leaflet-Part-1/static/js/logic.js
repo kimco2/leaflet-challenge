@@ -86,7 +86,8 @@ function getRadius(mag) {
         style: styleInfo,
         onEachFeature: function(feature, layer) {
             layer.bindPopup(`<h3>${feature.properties.place}</h3><hr>
-            <p><strong>Magnitude:</strong> ${feature.properties.mag} 
+            <p><strong>Coordinates:</strong> ${feature.geometry.coordinates[1]}, ${feature.geometry.coordinates[0]} 
+            <br><strong>Magnitude:</strong> ${feature.properties.mag} 
             <br><strong>Depth:</strong> ${feature.geometry.coordinates[2]}
             <br>${new Date(feature.properties.time)}</p>`);
           }
