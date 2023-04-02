@@ -32,7 +32,7 @@ let overlayMaps = {
 // Add a control to the map so the user can change the layers they look at
 L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 
-// Get the style data for each earthquake included on the map. Color is being set based on depth, and radius based on magnitude
+// Set the style data for each earthquake included on the map. Color is being set based on depth, and radius based on magnitude
 function styleInfo(feature) {
     return {
       fillOpacity: 1,
