@@ -27,7 +27,7 @@ Email: kymcoleman@gmail.com
 ------------------------------------------------------------------------
 <br/>
 
-Folder structure
+***Folder structure***
 
 -The folder **Leaflet-Part-1 / static / js** contains:
  - '**logic.js**' - the code for the map.
