@@ -3,35 +3,31 @@
  ### **Overview**
 The United States Geological Survey (USGS) provides scientific data about natural hazards, the health of our ecosystems and environment, and the impacts of climate and land-use change.
 
+This visualisation used leaflet to show earthquakes that occured in the last seven days from [USGS data](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
 
-This visualisation used leaflet to show all earthquakes which occured in the last seven days from USGS.  Data source:
-https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
-
-Aspects to note:
- - Connected to geojson API using D3
- - Marker size was varied based on earthquake magnitude
- - Each point has a tooltip containing additional information
- - The legend on the map shows the depth of the earthquake and their corresponding  colour.
-
+### **Aspects covered**
+ - Using D3 to connect to a geojson API
+ - Changing the marker size shown on the map based on earthquake magnitude
+ - Adding tooltips containing additional information
+ - Including a colour coded legend on the map that corresponds to earthquake depth
 
 ### **Visualisation**
 Below is an image of the map that was created.  
 ![earthquakes_map](earthquakes_map.png) 
 
-------------------------------------------------------------------------
+### **Folder structure**
+The folder *Leaflet-Part-1 / static / js* contains:
+ - *logic.js*  - code for the map
+ - *config.js* - url used
 
-### **Contact:**
+The folder *Leaflet-Part-1 / static / css* contains:
+ - *style.css* - updated to include the legend.
+
+<br>
+
+---
+
+### **Contact**
 Email: kymcoleman@gmail.com
 
-
-------------------------------------------------------------------------
-<br/>
-
-***Folder structure***
-
--The folder **Leaflet-Part-1 / static / js** contains:
- - '**logic.js**' - the code for the map.
- - '**config.js**' - the url used.
-
- -The folder **Leaflet-Part-1 / static / css** contains:
- - '**style.css**' - updated to include the legend.
+---
